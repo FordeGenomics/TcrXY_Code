@@ -1,0 +1,43 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Monaco;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red6\green0\blue135;\red191\green191\blue191;\red0\green0\blue0;
+\red62\green62\blue62;\red158\green0\blue3;\red11\green66\blue19;\red181\green118\blue12;}
+{\*\expandedcolortbl;;\cssrgb\c2500\c8500\c60000;\csgray\c79525;\cspthree\c0\c0\c0;
+\cssrgb\c31200\c30900\c30900;\cssrgb\c69000\c7500\c0;\cssrgb\c2000\c32000\c9500;\cssrgb\c76500\c53500\c3500;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww21040\viewh11780\viewkind0
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\tx528\tx1056\tx1584\tx2112\tx2640\tx3168\tx3696\tx4224\tx4752\tx5280\tx5808\tx6337\tx6865\tx7393\tx7921\tx8449\tx8977\tx9505\tx10033\tx10561\tx11089\tx11617\tx12145\tx12674\tx13202\tx13730\tx14258\tx14786\tx15314\tx15842\tx16370\tx16898\tx17426\tx17954\tx18483\tx19011\tx19539\tx20067\tx20595\tx21123\tx21651\tx22179\tx22707\tx23235\tx23763\tx24291\tx24820\tx25348\tx25876\tx26404\tx26932\tx27460\tx27988\tx28516\tx29044\tx29572\tx30100\tx30628\tx31157\tx31685\tx32213\tx32741\tx33269\tx33797\li80\fi-80\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf2 \
+library(\cf4 MSstats\cf2 ) \cf5 #imports msstats\cf2 \
+\cf4 ms\cf2  <- read.csv(\cf6 \'93input_file\'94\cf2 , \cf4 sep\cf2 =\cf6 ","\cf2 ) \cf5 #opens csv file\cf2 \
+\
+head(\cf4 ms\cf2 ) \cf5 #shows column names\cf2 \
+\
+\cf4 QuantData\cf2  <- dataProcess(\cf4 ms\cf2 ) \cf5 #processes the data\cf2 \
+\
+levels(\cf4 QuantData\cf2 $\cf4 GROUP_ORIGINAL\cf2 ) \cf5 #shows the groups in data\cf2 \
+\
+\cf4 comparison\cf2  <- matrix(c(\cf7 0\cf2 ,\cf7 0\cf2 ,\cf7 0\cf2 ,\cf7 0\cf2 ,\cf7 -1\cf2 ,\cf7 1\cf2 ,\cf7 0\cf2 ,\cf7 0\cf2 ), \cf4 nrow\cf2 =\cf7 1\cf2 ) \cf5 #select groups to compare - "1 - treatment", "-1 - control", "0 - background (remove if neccesary")\cf2 \
+row.names(\cf4 comparison\cf2 ) <- c(\cf6 \'93label_name\'94\cf2 ) \cf5 #label name\cf2 \
+\cf4 comparison\cf2  \cf5 #makes a comparison table comparing the two groups\cf2 \
+\
+\cf4 HighNilComparison\cf2  <- groupComparison(\cf4 contrast.matrix\cf2 =\cf4 comparison\cf2 , \cf4 data\cf2 =\cf4 QuantData\cf2 , \cf4 labeled\cf2 =\cf8 FALSE\cf2 , \cf4 interference\cf2 =\cf8 FALSE\cf2 , \cf4 featureVar\cf2 =\cf8 TRUE\cf2 ) \cf5 #performs statistical test  \cf2 \
+\cf4 HighNilComparison\cf2 $\cf4 ComparisonResult\cf2 \
+write.csv(\cf4 HighNilComparison\cf2 $\cf4 ComparisonResult\cf2 , \cf6 \'93output_file\'94\cf2 ) \cf5 #saves comparison table of outputs including LOG2FC and p values to a csv.\cf2 \
+\
+\cf5 #-------------DATA PROCESS PLOTS--------------------------# \cf2 \
+\cf5 # remove dash infront of line to run.\cf2 \
+dataProcessPlots(\cf4 data\cf2  = \cf4 QuantData\cf2 , \cf4 type\cf2 =\cf6 "QCPlot"\cf2 )\
+\cf5 #dataProcessPlots(data = QuantData, type="ProfilePlot")\cf2 \
+\cf5 #dataProcessPlots(data = QuantData, type="ConditionPlot")\cf2 \
+\
+\cf5 #-------------groupComparisonPlots-------------------------------------#\cf2 \
+\cf5 # remove dash infront of line to run.\cf2 \
+groupComparisonPlots(\cf4 data\cf2  = \cf4 HighNilComparison\cf2 $\cf4 ComparisonResult\cf2 , \cf4 type\cf2 =\cf6 "VolcanoPlot"\cf2 )\
+\cf5 #groupComparisonPlots(data = HighNilComparison$ComparisonResult, type="Heatmap")\cf2 \
+\cf5 #groupComparisonPlots(data = HighNilComparison$ComparisonResult, type="ComparisonPlot")
+\f1\fs24 \cf0 \cell \lastrow\row
+}

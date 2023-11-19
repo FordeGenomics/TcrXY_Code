@@ -2,3 +2,5 @@
 
 ### Files:
 * ipy.py - Python script for finding interspaced palindromic sequences
+* Supplementary_Script_1.rtf
+* Supplementary_Script_2.rtf - R script for analysis
